@@ -1,19 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="Vue logo" class="mx-auto" src="./assets/logo.png" />
+    <PanelView />
+    <FormView />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PanelView from "./views/PanelView.vue";
+import FormView from "./views/FormView.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    PanelView,
+    FormView,
+  },
+  data() {
+    return {
+      form: {
+        series_name: "",
+        release_year: 0,
+      },
+    };
+  },
+
+  methods: {
+    changeForm(series_name, value) {
+      this.form[series_name] = value;
+    },
+  },
+
+  provide() {
+    return {
+      form: this.form,
+      changeForm: this.changeForm,
+    };
+  },
+};
 </script>
 
 <style>
